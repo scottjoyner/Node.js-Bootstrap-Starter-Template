@@ -1,0 +1,70 @@
+
+html
+  head
+    title cytoscape-expand-collapse.js demo
+    meta(charset='utf-8')
+    meta(name='viewport', content='width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1')
+    link(rel='stylesheet', href='css/style.css')
+    script(src='https://unpkg.com/cytoscape/dist/cytoscape.min.js')
+    // jquery for graphml
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js')
+    // for testing with local version of cytoscape.js
+    // <script src="../cytoscape.js/build/cytoscape.js"></script>
+    script(src='https://unpkg.com/layout-base/layout-base.js')
+    script(src='https://unpkg.com/cose-base/cose-base.js')
+    script(src='https://unpkg.com/cytoscape-fcose/cytoscape-fcose.js')
+    script(src='https://unpkg.com/cytoscape-graphml/cytoscape-graphml.js')
+    script(src='js/cytoscape-expand-collapse.js')
+    script(src='js/demo-compounds.js')
+  body
+    h1 cytoscape-expand-collapse demo
+    .fleft
+      .menu-container
+        .accordion-container
+          .accordion General
+          .panel
+            button#graphml(onclick="document.getElementById('graphml-input').click();")
+              | Import from GraphML file
+            input#graphml-input(type='file', name='name', style='display: none;')
+            input#load-from-inp(type='file', name='name', style='display: none;')
+            button#saveAsJson Save as JSON
+            button#loadFromJson Load from JSON
+        .accordion-container
+          .accordion Nodes
+          .panel
+            button#add-compound Add compound for selected
+            button#remove-compound Remove selected compound
+            button#expandAllAndRemove Expand all and remove
+            button#loadInCollapsedState Load compouds collapsed
+            button#collapseAll Collapse all nodes
+            button#expandAll Expand all nodes
+            button#collapseRecursively Collapse selected recursively
+            button#expandRecursively Expand selected recursively
+            button#apply-markov-clustering Apply Markov clustering
+            div
+              label(for='clustering-depth-input')
+                b  Clustering depth: 
+              input#clustering-depth-input(type='number', value='1', min='1', style='width:50px', oninput='(!validity.rangeUnderflow||(value=1)) &&\
+              (!validity.stepMismatch||(value=parseInt(this.value)));')
+            div
+              label(for='cluster-by-default')
+                b Apply Markov clustering on load
+              input#cluster-by-default(type='checkbox')
+        .accordion-container
+          .accordion Edges
+          .panel
+            button#collapseAllEdges Collapse all edges 
+            button#expandAllEdges Expand all edges 
+            button#collapseSelectedEdges Collapse selected edges
+            button#expandSelectedEdges Expand selected edges 
+            button#collapseEdgesBetweenNodes  Collapse edges between selected nodes
+            button#expandEdgesBetweenNodes  Expand edges between selected nodes
+            div
+              label(for='cluster-by-default')
+                b Group edges of similar type
+              input#groupEdges(type='checkbox')
+            div
+              label(for='cluster-by-default')
+                b Allow nested edge collapse 
+              input#allowNestedEdgeCollapse(type='checkbox')
+    #cy.fright
